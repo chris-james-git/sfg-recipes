@@ -3,6 +3,7 @@ package guru.springframework.recipes.bootstrap;
 import guru.springframework.recipes.domain.Category;
 import guru.springframework.recipes.domain.Difficulty;
 import guru.springframework.recipes.domain.Ingredient;
+import guru.springframework.recipes.domain.Notes;
 import guru.springframework.recipes.domain.Recipe;
 import guru.springframework.recipes.domain.UnitOfMeasure;
 import guru.springframework.recipes.repositories.CategoryRepository;
@@ -54,27 +55,29 @@ public class DataLoader implements CommandLineRunner {
 
         Recipe savedRecipe = recipeRepository.save(recipe);
 
-        savedRecipe.getIngredients().addAll(Set.of(
-                createIngredient(2, tablespoon,"ancho chili powder", savedRecipe),
-                createIngredient(1, teaspoon,"dried oregano", savedRecipe),
-                createIngredient( 1, teaspoon,"dried cumin", savedRecipe),
-                createIngredient( 1, teaspoon,"sugar", savedRecipe),
-                createIngredient( 0.5, teaspoon,"salt", savedRecipe),
-                createIngredient( 1, qty,"clove garlic, finely chopped", savedRecipe),
-                createIngredient( 1, tablespoon,"finely grated orange zest", savedRecipe),
-                createIngredient( 3, tablespoon,"fresh-squeezed orange juice", savedRecipe),
-                createIngredient( 2, tablespoon,"olive oil", savedRecipe),
-                createIngredient( 5, qty,"skinless, boneless chicken thighs (1 1/4 pounds)", savedRecipe),
-                createIngredient( 8, qty,"small corn tortillas", savedRecipe),
-                createIngredient( 3, cup,"packed baby arugula (3 ounces)", savedRecipe),
-                createIngredient( 2, qty,"medium ripe avocados, sliced", savedRecipe),
-                createIngredient( 4, qty,"radishes, thinly sliced", savedRecipe),
-                createIngredient( 0.5, pint,"cherry tomatoes, halved", savedRecipe),
-                createIngredient( 0.25, qty,"red onion, thinly sliced", savedRecipe),
-                createIngredient( 1, qty,"roughly chopped cilantro", savedRecipe),
-                createIngredient( 0.5, cup,"sour cream thinned with 1/4 cup milk", savedRecipe),
-                createIngredient( 1, qty,"lime, cut into wedges", savedRecipe)
-        ));
+        savedRecipe.setNotes(createNote("Spicy grilled chicken tacos! Quick marinade, then grill. Ready in " +
+                "about 30 minutes. Great for a quick weeknight dinner, backyard cookouts, and tailgate parties."));
+
+        savedRecipe.addIngredients(
+                createIngredient(2, tablespoon, "ancho chili powder"),
+                createIngredient(1, teaspoon, "dried oregano"),
+                createIngredient(1, teaspoon, "dried cumin"),
+                createIngredient(1, teaspoon, "sugar"),
+                createIngredient(0.5, teaspoon, "salt"),
+                createIngredient(1, qty, "clove garlic, finely chopped"),
+                createIngredient(1, tablespoon, "finely grated orange zest"),
+                createIngredient(3, tablespoon, "fresh-squeezed orange juice"),
+                createIngredient(2, tablespoon, "olive oil"),
+                createIngredient(5, qty, "skinless, boneless chicken thighs (1 1/4 pounds)"),
+                createIngredient(8, qty, "small corn tortillas"),
+                createIngredient(3, cup, "packed baby arugula (3 ounces)"),
+                createIngredient(2, qty, "medium ripe avocados, sliced"),
+                createIngredient(4, qty, "radishes, thinly sliced"),
+                createIngredient(0.5, pint, "cherry tomatoes, halved"),
+                createIngredient(0.25, qty, "red onion, thinly sliced"),
+                createIngredient(1, qty, "roughly chopped cilantro"),
+                createIngredient(0.5, cup, "sour cream thinned with 1/4 cup milk"),
+                createIngredient(1, qty, "lime, cut into wedges"));
 
         Category mexican = categoryRepository.findByDescription("Mexican").orElseThrow();
         savedRecipe.getCategories().add(mexican);
@@ -99,45 +102,47 @@ public class DataLoader implements CommandLineRunner {
 
         Recipe savedRecipe = recipeRepository.save(recipe);
 
-        savedRecipe.getIngredients().addAll(Set.of(
-                createIngredient(2, qty,
-                        "ripe avocados", savedRecipe),
-                createIngredient(0.25, teaspoon,
-                        "salt, plus more to taste", savedRecipe),
-                createIngredient(1, tablespoon,
-                        "fresh lime or lemon juice", savedRecipe),
-                createIngredient(3, tablespoon,
-                        "minced red onion or thinly sliced green onion", savedRecipe),
-                createIngredient(2, qty,
-                        "serrano (or jalapeño) chilis, stems and seeds removed, minced", savedRecipe),
-                createIngredient(2, tablespoon,
-                        "cilantro (leaves and tender stems), finely chopped", savedRecipe),
-                createIngredient(1, pinch,
-                        "freshly ground black pepper", savedRecipe),
-                createIngredient(0.5, qty,
-                        "ripe tomato, chopped (optional)", savedRecipe)
-        ));
+        savedRecipe.setNotes(createNote("The best guacamole keeps it simple: just ripe avocados, salt, " +
+                "a squeeze of lime, onions, chilis, cilantro, and some chopped tomato. Serve it as a dip at your " +
+                "next party or spoon it on top of tacos for an easy dinner upgrade."));
 
+        savedRecipe.addIngredients(
+                createIngredient(2, qty, "ripe avocados"),
+                createIngredient(0.25, teaspoon, "salt, plus more to taste"),
+                createIngredient(1, tablespoon, "fresh lime or lemon juice"),
+                createIngredient(3, tablespoon, "minced red onion or thinly sliced green onion"),
+                createIngredient(2, qty, "serrano (or jalapeño) chilis, stems and seeds removed, minced"),
+                createIngredient(2, tablespoon, "cilantro (leaves and tender stems), finely chopped"),
+                createIngredient(1, pinch, "freshly ground black pepper"),
+                createIngredient(0.5, qty, "ripe tomato, chopped (optional)"));
+
+        Category american = categoryRepository.findByDescription("American").orElseThrow();
         Category mexican = categoryRepository.findByDescription("Mexican").orElseThrow();
+        savedRecipe.getCategories().add(american);
         savedRecipe.getCategories().add(mexican);
         recipeRepository.save(savedRecipe);
     }
 
-    private Ingredient createIngredient(int amount, UnitOfMeasure uom, String description, Recipe recipe) {
-        return createIngredient(BigDecimal.valueOf(amount), uom, description, recipe);
+    private Ingredient createIngredient(int amount, UnitOfMeasure uom, String description) {
+        return createIngredient(BigDecimal.valueOf(amount), uom, description);
     }
 
-    private Ingredient createIngredient(double amount, UnitOfMeasure uom, String description, Recipe recipe) {
-        return createIngredient(BigDecimal.valueOf(amount), uom, description, recipe);
+    private Ingredient createIngredient(double amount, UnitOfMeasure uom, String description) {
+        return createIngredient(BigDecimal.valueOf(amount), uom, description);
     }
 
-    private Ingredient createIngredient(BigDecimal amount, UnitOfMeasure uom, String description, Recipe recipe) {
+    private Ingredient createIngredient(BigDecimal amount, UnitOfMeasure uom, String description) {
         Ingredient ingredient = new Ingredient();
         ingredient.setDescription(description);
         ingredient.setUom(uom);
         ingredient.setAmount(amount);
-        ingredient.setRecipe(recipe);
         return ingredient;
+    }
+
+    private Notes createNote(String recipeNotes) {
+        Notes notes = new Notes();
+        notes.setRecipeNotes(recipeNotes);
+        return notes;
     }
 
     private static String perfectGuacamoleDescription() {
@@ -175,7 +180,7 @@ public class DataLoader implements CommandLineRunner {
                 "</li>" +
                 "</ol>";
     }
-    
+
     private static String spicyGrilledChickenTacosDescription() {
         return "<ol>" +
                 "<li>" +

@@ -24,7 +24,7 @@ public class IndexController {
     public String getIndexPage() {
 
         Category category = categoryRepository.findByDescription("American").orElseThrow();
-        UnitOfMeasure unitOfMeasure = unitOfMeasureRepository.findByDescription("Teaspoon").orElseThrow();
+        UnitOfMeasure unitOfMeasure = unitOfMeasureRepository.findByDescription("teaspoon").orElseThrow();
 
         System.out.println("Cat Id is: " + category.getId());
         System.out.println("UOM Id is: " + unitOfMeasure.getId());

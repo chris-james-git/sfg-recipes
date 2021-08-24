@@ -1,6 +1,7 @@
 package guru.springframework.recipes.bootstrap;
 
 import guru.springframework.recipes.domain.Category;
+import guru.springframework.recipes.domain.Difficulty;
 import guru.springframework.recipes.domain.Ingredient;
 import guru.springframework.recipes.domain.Recipe;
 import guru.springframework.recipes.domain.UnitOfMeasure;
@@ -49,6 +50,7 @@ public class DataLoader implements CommandLineRunner {
         recipe.setSource("www.SimplyRecipes.com");
         recipe.setUrl("https://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/");
         recipe.setDirections(spicyGrilledChickenTacosDescription());
+        recipe.setDifficulty(Difficulty.MODERATE);
 
         Recipe savedRecipe = recipeRepository.save(recipe);
 
@@ -93,6 +95,7 @@ public class DataLoader implements CommandLineRunner {
         recipe.setSource("www.SimplyRecipes.com");
         recipe.setUrl("https://www.simplyrecipes.com/recipes/perfect_guacamole/");
         recipe.setDirections(perfectGuacamoleDescription());
+        recipe.setDifficulty(Difficulty.EASY);
 
         Recipe savedRecipe = recipeRepository.save(recipe);
 

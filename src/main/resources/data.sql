@@ -1,5 +1,5 @@
 INSERT INTO recipe (id, description, prep_time, cook_time, servings, source, url, directions)
-VALUES (1, 'Perfect Guacamole', 10, 0, 4, 'www.SimplyRecipes.com',
+VALUES (1, 'Perfect Guacamole', 10, 0, 3, 'www.SimplyRecipes.com',
         'https://www.simplyrecipes.com/recipes/perfect_guacamole/',
         '<ol>' ||
             '<li>' ||
@@ -35,8 +35,39 @@ VALUES (1, 'Perfect Guacamole', 10, 0, 4, 'www.SimplyRecipes.com',
             '</li>' ||
         '</ol>');
 
--- INSERT INTO recipe (id, description, prepTime, cookTime, servings, source, url, directions)
--- VALUES (2, 'Spicy Grilled Chicken Tacos', ?, ?, ?, ?, ?, ?);
+INSERT INTO recipe (id, description, prep_time, cook_time, servings, source, url, directions)
+VALUES (2, 'Spicy Grilled Chicken Tacos', 20, 15, 5, 'www.SimplyRecipes.com',
+        'https://www.simplyrecipes.com/recipes/spicy_grilled_chicken_tacos/',
+        '<ol>' ||
+            '<li>' ||
+                '<h3>Prepare a gas or charcoal grill for medium-high, direct heat</h3>' ||
+            '</li>' ||
+            '<li>' ||
+                '<h3>Make the marinade and coat the chicken:</h3>' ||
+                '<p>In a large bowl, stir together the chili powder, oregano, cumin, sugar, salt, garlic and ' ||
+                'orange zest. Stir in the orange juice and olive oil to make a loose paste. Add the chicken to ' ||
+                'the bowl and toss to coat all over.</p>' ||
+                '<p>Set aside to marinate while the grill heats and you prepare the rest of the toppings.</p>' ||
+            '</li>' ||
+            '<li>' ||
+                '<h3>Grill the chicken:</h3>' ||
+                '<p>Grill the chicken for 3 to 4 minutes per side, or until a thermometer inserted into the ' ||
+                'thickest part of the meat registers 165F. Transfer to a plate and rest for 5 minutes.</p>' ||
+            '</li>' ||
+            '<li>' ||
+                '<h3>Warm the tortillas:</h3>' ||
+                '<p>Place each tortilla on the grill or on a hot, dry skillet over medium-high heat. As soon as ' ||
+                'you see pockets of the air start to puff up in the tortilla, turn it with tongs and heat for a ' ||
+                'few seconds on the other side.</p>' ||
+                '<p>Wrap warmed tortillas in a tea towel to keep them warm until serving.</p>' ||
+            '</li>' ||
+            '<li>' ||
+                '<h3>Assemble the tacos:</h3>' ||
+                '<p>Slice the chicken into strips. On each tortilla, place a small handful of arugula. Top with ' ||
+                'chicken slices, sliced avocado, radishes, tomatoes, and onion slices. Drizzle with the thinned ' ||
+                'sour cream. Serve with lime wedges.</p>' ||
+            '</li>' ||
+        '</ol>');
 
 INSERT INTO category (id, description) VALUES (1, 'American');
 INSERT INTO category (id, description) VALUES (2, 'Italian');
@@ -49,7 +80,9 @@ INSERT INTO unit_of_measure (id, description) VALUES (4, 'pinch');
 INSERT INTO unit_of_measure (id, description) VALUES (5, 'dash');
 INSERT INTO unit_of_measure (id, description) VALUES (6, 'ounce');
 INSERT INTO unit_of_measure (id, description) VALUES (7, '');
+INSERT INTO unit_of_measure (id, description) VALUES (8, 'pint');
 
+-- Perfect Guacamole Ingredients
 INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
     VALUES (1, 2, 7, 'ripe avocados', 1);
 INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
@@ -66,3 +99,44 @@ INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
     VALUES (7, 1, 4, 'freshly ground black pepper', 1);
 INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
     VALUES (8, 0.5, 7, 'ripe tomato, chopped (optional)', 1);
+
+-- Spicy Grilled Chicken Tacos Ingredients
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(9, 2, 2, 'ancho chili powder', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(10, 1, 1, 'dried oregano', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(11, 1, 1, 'dried cumin', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(12, 1, 1, 'sugar', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(13, 0.5, 1, 'salt', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(14, 1, 7, 'clove garlic, finely chopped', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(15, 1, 2, 'finely grated orange zest', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(16, 3, 2, 'fresh-squeezed orange juice', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(17, 2, 2, 'olive oil', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(18, 5, 7, 'skinless, boneless chicken thighs (1 1/4 pounds)', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(19, 8, 7, 'small corn tortillas', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(20, 3, 3, 'packed baby arugula (3 ounces)', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(21, 2, 7, 'medium ripe avocados, sliced', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(22, 4, 7, 'radishes, thinly sliced', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(23, 0.5, 8, 'cherry tomatoes, halved', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(24, 0.25, 7, 'red onion, thinly sliced', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(25, 1, 7, 'roughly chopped cilantro', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(26, 0.5, 3, 'sour cream thinned with 1/4 cup milk', 2);
+INSERT INTO ingredient (id, amount, uom_id, description, recipe_id)
+    VALUES(27, 1, 7, 'lime, cut into wedges', 2);
+

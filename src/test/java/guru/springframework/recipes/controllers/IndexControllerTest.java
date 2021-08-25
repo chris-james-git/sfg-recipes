@@ -22,6 +22,9 @@ public class IndexControllerTest {
     @Mock
     private RecipeService recipeService;
 
+    @Mock
+    private Model model;
+
     @Before
     public void setUp() throws Exception {
         MockitoAnnotations.openMocks(this);
@@ -32,11 +35,10 @@ public class IndexControllerTest {
     public void getIndexPage() {
         Set<Recipe> recipes = Set.of(mock(Recipe.class));
         when(recipeService.getRecipes()).thenReturn(recipes);
-        Model model = mock(Model.class);
 
-        String result = indexController.getIndexPage(model);
+        String viewName = indexController.getIndexPage(model);
 
-        assertEquals("index", result);
+        assertEquals("index", viewName);
         verify(model).addAttribute("recipes", recipes);
     }
 }

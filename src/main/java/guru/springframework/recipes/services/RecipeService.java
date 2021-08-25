@@ -2,9 +2,9 @@ package guru.springframework.recipes.services;
 
 import guru.springframework.recipes.domain.Recipe;
 
-import java.util.List;
+import java.util.Set;
 
 public interface RecipeService {
 
-    List<Recipe> findAll();
+    Set<Recipe> getRecipes();
 }
